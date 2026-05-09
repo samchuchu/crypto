@@ -1,0 +1,29 @@
+<svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+  <!-- Body -->
+  <ellipse cx="90" cy="115" rx="45" ry="40" fill="#F3E5F5"/>
+  <!-- Head -->
+  <ellipse cx="90" cy="75" rx="45" ry="40" fill="#E1BEE7"/>
+  <!-- Graduation cap -->
+  <rect x="65" y="30" width="50" height="8" rx="2" fill="#7B1FA2"/>
+  <polygon points="90,30 70,20 110,20" fill="#7B1FA2"/>
+  <rect x="88" y="15" width="4" height="8" fill="#7B1FA2"/>
+  <circle cx="110" cy="22" r="3" fill="#FFD700"/>
+  <!-- Eyes (owl style, big) -->
+  <circle cx="78" cy="72" r="10" fill="white"/>
+  <circle cx="102" cy="72" r="10" fill="white"/>
+  <circle cx="78" cy="72" r="6" fill="#3E2723"/>
+  <circle cx="102" cy="72" r="6" fill="#3E2723"/>
+  <circle cx="80" cy="70" r="2.5" fill="white"/>
+  <circle cx="104" cy="70" r="2.5" fill="white"/>
+  <!-- Beak -->
+  <polygon points="90,80 85,88 95,88" fill="#FFCC80"/>
+  <!-- Wings -->
+  <ellipse cx="55" cy="105" rx="12" ry="18" fill="#CE93D8"/>
+  <ellipse cx="125" cy="105" rx="12" ry="18" fill="#CE93D8"/>
+  <!-- Flag -->
+  <rect x="130" y="70" width="3" height="40" fill="#8D6E63"/>
+  <path d="M133 70 L155 78 L133 86 Z" fill="#FF8C69"/>
+  <!-- Feet -->
+  <ellipse cx="80" cy="148" rx="8" ry="5" fill="#FFCC80"/>
+  <ellipse cx="100" cy="148" rx="8" ry="5" fill="#FFCC80"/>
+</svg>
