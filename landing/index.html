@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Guide: Bank of Taiwan → MetaMask → SGD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FFFBF5',
+                        peach: '#FFF5E6',
+                        coral: '#FF8C69',
+                        'coral-deep': '#FF7043',
+                        sky: '#81D4FA',
+                        'sky-deep': '#4FC3F7',
+                        mint: '#A7FFEB',
+                        lavender: '#E1BEE7',
+                        brown: '#3E2723',
+                        'brown-muted': '#8D6E63',
+                        border: '#FFE0B2',
+                    },
+                    fontFamily: {
+                        outfit: ['Outfit', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: #FFFBF5; color: #3E2723; }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #FF8C69, #81D4FA, #A7FFEB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #FFFBF5 0%, #FFF5E6 50%, #E1BEE7 100%);
+        }
+        
+        .hero-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,140,105,0.15) 0%, transparent 70%);
+            top: -200px;
+            right: -100px;
+            z-index: 0;
+        }
+        
+        .hero-glow-2 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(129,212,250,0.12) 0%, transparent 70%);
+            bottom: -150px;
+            left: -100px;
+            z-index: 0;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        
+        .float { animation: float 4s ease-in-out infinite; }
+        .float-delay { animation: float 4s ease-in-out infinite 1s; }
+        .float-delay-2 { animation: float 4s ease-in-out infinite 2s; }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .card {
+            background: white;
+            border: 1px solid #FFE0B2;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(255,140,105,0.12);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #FF8C69, #FF7043);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,112,67,0.3);
+        }
+        
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 1; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+        
+        .pulse-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid #FF8C69;
+            animation: pulse-ring 2s ease-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-md border-b border-border">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-coral to-sky flex items-center justify-center">
+                    <i data-lucide="bitcoin" class="w-5 h-5 text-white"></i>
+                </div>
+                <span class="font-outfit font-bold text-xl text-brown">CryptoGuide</span>
+            </div>
+            <a href="../index.html" class="text-brown-muted hover:text-coral transition-colors font-medium">Enter Guide →</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden gradient-bg pt-20">
+        <div class="hero-glow"></div>
+        <div class="hero-glow-2"></div>
+        
+        <div class="max-w-6xl mx-auto px-6 py-20 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-in-up">
+                    <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-border rounded-full px-4 py-2 mb-6">
+                        <span class="w-2 h-2 rounded-full bg-mint animate-pulse"></span>
+                        <span class="text-sm font-medium text-brown-muted">Free Step-by-Step Guide</span>
+                    </div>
+                    
+                    <h1 class="font-outfit font-bold text-5xl lg:text-6xl leading-tight mb-6">
+                        Buy Crypto from <br>
+                        <span class="gradient-text">Bank of Taiwan</span> <br>
+                        to MetaMask
+                    </h1>
+                    
+                    <p class="text-lg text-brown-muted leading-relaxed mb-8 max-w-lg">
+                        The simplest way to turn your Taiwan bank account into SGD-stable crypto. 
+                        No complex exchanges. No hidden fees. Just clear steps.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <a href="../index.html" class="btn-primary text-lg">
+                            <i data-lucide="rocket" class="w-5 h-5"></i>
+                            Start the Guide
+                        </a>
+                        <a href="#how-it-works" class="px-8 py-4 rounded-14 border-2 border-border text-brown font-medium hover:border-coral hover:text-coral transition-all">
+                            See How It Works
+                        </a>
+                    </div>
+                    
+                    <div class="flex items-center gap-6 mt-10 text-sm text-brown-muted">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="shield-check" class="w-4 h-4 text-mint"></i>
+                            <span>Secure Process</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="clock" class="w-4 h-4 text-sky"></i>
+                            <span>~15 Minutes</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="wallet" class="w-4 h-4 text-coral"></i>
+                            <span>Self-Custody</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative hidden lg:block">
+                    <div class="float">
+                        <img src="images/hero-crypto.png" alt="Crypto illustration" class="w-full rounded-3xl shadow-2xl">
+                    </div>
+                    <!-- Floating elements -->
+                    <div class="absolute -top-4 -right-4 bg-white rounded-2xl p-4 shadow-lg float-delay">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-mint/30 flex items-center justify-center">
+                                <i data-lucide="trending-up" class="w-5 h-5 text-mint"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-brown-muted">Simple</p>
+                                <p class="font-semibold text-brown">3 Steps</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 bg-white rounded-2xl p-4 shadow-lg float-delay-2">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-coral/20 flex items-center justify-center">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-coral"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-brown-muted">Verified</p>
+                                <p class="font-semibold text-brown">Tested Flow</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-brown-muted">
+            <span class="text-sm">Scroll to explore</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 animate-bounce"></i>
+        </div>
+    </section>
+
+    <!-- Value Props -->
+    <section class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-outfit font-bold text-4xl text-brown mb-4">Why This Guide?</h2>
+                <p class="text-brown-muted text-lg max-w-2xl mx-auto">
+                    Built from real experience. No fluff. Just the exact steps you need.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card p-8">
+                    <div class="feature-icon bg-coral/10 mb-6">
+                        <i data-lucide="shield" class="w-7 h-7 text-coral"></i>
+                    </div>
+                    <h3 class="font-outfit font-bold text-xl text-brown mb-3">Self-Custody First</h3>
+                    <p class="text-brown-muted leading-relaxed">
+                        Your crypto stays in your MetaMask wallet. No exchange custody. 
+                        You control your private keys from day one.
+                    </p>
+                </div>
+                
+                <div class="card p-8">
+                    <div class="feature-icon bg-sky/10 mb-6">
+                        <i data-lucide="zap" class="w-7 h-7 text-sky"></i>
+                    </div>
+                    <h3 class="font-outfit font-bold text-xl text-brown mb-3">Fast & Simple</h3>
+                    <p class="text-brown-muted leading-relaxed">
+                        No KYC on foreign exchanges. No wire transfer headaches. 
+                        From Bank of Taiwan to MetaMask in about 15 minutes.
+                    </p>
+                </div>
+                
+                <div class="card p-8">
+                    <div class="feature-icon bg-mint/20 mb-6">
+                        <i data-lucide="piggy-bank" class="w-7 h-7 text-mint"></i>
+                    </div>
+                    <h3 class="font-outfit font-bold text-xl text-brown mb-3">Low Fees</h3>
+                    <p class="text-brown-muted leading-relaxed">
+                        Built-in fee calculator shows exactly what you'll pay. 
+                        Compare methods side-by-side to find the cheapest route.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-24 gradient-bg">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-outfit font-bold text-4xl text-brown mb-4">How It Works</h2>
+                <p class="text-brown-muted text-lg max-w-2xl mx-auto">
+                    Three clear steps from your Taiwan bank account to crypto in your wallet.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="relative">
+                    <div class="card p-8 h-full">
+                        <div class="step-number bg-coral text-white mb-6">1</div>
+                        <div class="mb-6 rounded-2xl overflow-hidden">
+                            <img src="images/step1-bank.png" alt="Bank of Taiwan" class="w-full h-48 object-cover">
+                        </div>
+                        <h3 class="font-outfit font-bold text-xl text-brown mb-3">Bank of Taiwan</h3>
+                        <p class="text-brown-muted leading-relaxed">
+                            Transfer NTD to a trusted intermediary. Use your existing 
+                            Bank of Taiwan account — no new accounts needed.
+                        </p>
+                    </div>
+                    <!-- Connector -->
+                    <div class="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
+                        <i data-lucide="arrow-right" class="w-8 h-8 text-coral"></i>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="card p-8 h-full">
+                        <div class="step-number bg-sky text-white mb-6">2</div>
+                        <div class="mb-6 rounded-2xl overflow-hidden">
+                            <img src="images/step2-wallet.png" alt="MetaMask Wallet" class="w-full h-48 object-cover">
+                        </div>
+                        <h3 class="font-outfit font-bold text-xl text-brown mb-3">MetaMask Setup</h3>
+                        <p class="text-brown-muted leading-relaxed">
+                            Install MetaMask, create your wallet, and get your first 
+                            address. Walkthrough with screenshots included.
+                        </p>
+                    </div>
+                    <!-- Connector -->
+                    <div class="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
+                        <i data-lucide="arrow-right" class="w-8 h-8 text-sky"></i>
+                    </div>
+                </div>
+                
+                <div class="card p-8 h-full">
+                    <div class="step-number bg-mint text-brown mb-6">3</div>
+                    <div class="mb-6 rounded-2xl overflow-hidden">
+                        <img src="images/step3-sgd.png" alt="SGD Stablecoin" class="w-full h-48 object-cover">
+                    </div>
+                    <h3 class="font-outfit font-bold text-xl text-brown mb-3">Get SGD Crypto</h3>
+                    <p class="text-brown-muted leading-relaxed">
+                        Receive SGD-backed stablecoins directly in your wallet. 
+                        Ready to use, trade, or hold. Full control.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="font-outfit font-bold text-4xl text-brown mb-6">
+                        What's Inside the Guide?
+                    </h2>
+                    <p class="text-brown-muted text-lg mb-8">
+                        Everything you need, nothing you don't. Interactive tools 
+                        and clear instructions at every step.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-coral/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="list-checks" class="w-6 h-6 text-coral"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-brown mb-1">Interactive Checklist</h4>
+                                <p class="text-brown-muted">Track your progress step by step. Check off completed actions.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-sky/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="calculator" class="w-6 h-6 text-sky"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-brown mb-1">Fee Calculator</h4>
+                                <p class="text-brown-muted">See total costs before you start. Compare transfer amounts side-by-side.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-mint/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="book-open" class="w-6 h-6 text-mint"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-brown mb-1">Glossary & FAQ</h4>
+                                <p class="text-brown-muted">Crypto terms explained simply. Common questions answered upfront.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-lavender/30 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="scale" class="w-6 h-6 text-lavender"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-brown mb-1">Method Comparison</h4>
+                                <p class="text-brown-muted">Compare different approaches. Pick the one that fits your situation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="float">
+                        <img src="images/features-preview.png" alt="Guide preview" class="w-full rounded-3xl shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="py-24 gradient-bg">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="font-outfit font-bold text-4xl text-brown mb-6">
+                Built from Real Experience
+            </h2>
+            <p class="text-brown-muted text-lg mb-12 max-w-2xl mx-auto">
+                This guide was created after going through the process personally. 
+                Every step tested. Every fee verified.
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-border">
+                    <div class="text-4xl font-outfit font-bold gradient-text mb-2">3</div>
+                    <p class="text-brown-muted">Clear Steps</p>
+                </div>
+                <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-border">
+                    <div class="text-4xl font-outfit font-bold gradient-text mb-2">15</div>
+                    <p class="text-brown-muted">Minutes Average</p>
+                </div>
+                <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-border">
+                    <div class="text-4xl font-outfit font-bold gradient-text mb-2">0</div>
+                    <p class="text-brown-muted">Hidden Fees</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-brown relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-96 h-96 bg-coral rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-sky rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 class="font-outfit font-bold text-4xl lg:text-5xl text-white mb-6">
+                Ready to Get Started?
+            </h2>
+            <p class="text-white/70 text-lg mb-10 max-w-2xl mx-auto">
+                The complete step-by-step guide is waiting. Take control of your crypto journey 
+                in the next 15 minutes.
+            </p>
+            
+            <a href="../index.html" class="inline-flex items-center gap-3 bg-white text-brown px-10 py-5 rounded-2xl font-semibold text-lg hover:bg-cream transition-all hover:scale-105 shadow-2xl">
+                <i data-lucide="rocket" class="w-6 h-6"></i>
+                Launch the Guide
+            </a>
+            
+            <p class="text-white/50 text-sm mt-6">
+                Free. No signup required. Works on mobile & desktop.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-cream border-t border-border">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-coral to-sky flex items-center justify-center">
+                    <i data-lucide="bitcoin" class="w-4 h-4 text-white"></i>
+                </div>
+                <span class="font-outfit font-bold text-brown">CryptoGuide</span>
+            </div>
+            <p class="text-brown-muted text-sm">
+                Not financial advice. For educational purposes only.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        // Simple scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
