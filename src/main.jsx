@@ -45,16 +45,16 @@ const branchLabels = {
   dbs: 'DBS off-ramp',
 };
 
-const roleColors = {
-  prepare: ['#7ec8e3', '#ffffff', '#ffb86b'],
-  taiwan: ['#8ed7be', '#fff6d8', '#496a55'],
-  kyc: ['#9ab6ff', '#eef4ff', '#334a87'],
-  buy: ['#ffd166', '#fff4c2', '#755f22'],
-  metamask: ['#f7a072', '#fbe1d2', '#7a3d2d'],
-  choose: ['#c9a7ff', '#f4eaff', '#5a4180'],
-  spend: ['#ff8fab', '#ffe8ef', '#8b3651'],
-  dbs: ['#8dd7ff', '#e7f7ff', '#245a73'],
-  records: ['#b6df8c', '#f0ffe3', '#41631e'],
+const roleImageLabels = {
+  prepare: 'Approved preparation assistant cat',
+  taiwan: 'Approved Taiwan bank teller cat',
+  kyc: 'Approved KYC officer cat',
+  buy: 'Approved market analyst cat',
+  metamask: 'Approved self-custody explorer cat',
+  choose: 'Approved route guide cat',
+  spend: 'Approved spending route shopper cat',
+  dbs: 'Approved DBS off-ramp accountant cat',
+  records: 'Approved records archivist cat',
 };
 
 function getInitialState() {
@@ -141,7 +141,6 @@ function App() {
       </section>
 
       <section className="hero-panel" aria-labelledby="tracker-title">
-        <img className="hero-map-art" src="/crypto/assets/route-map-cats.png" alt="" aria-hidden="true" />
         <div>
           <p className="small-label">Personal crypto route progress</p>
           <h1 id="tracker-title">Crypto Route Tracker</h1>
@@ -397,42 +396,9 @@ function SummaryTile({ icon: Icon, label, value, detail }) {
 }
 
 function CatMascot({ role, large = false }) {
-  const [coat, outfit, accent] = roleColors[role] || roleColors.prepare;
-  const accessory = {
-    prepare: 'clipboard',
-    taiwan: 'tag',
-    kyc: 'card',
-    buy: 'chart',
-    metamask: 'key',
-    choose: 'sign',
-    spend: 'phone',
-    dbs: 'receipt',
-    records: 'folder',
-  }[role];
-
   return (
-    <span className={`cat-wrap ${large ? 'large' : ''}`} aria-hidden="true">
-      <svg viewBox="0 0 120 120" className="cat-svg">
-        <circle cx="60" cy="66" r="47" fill={outfit} />
-        <path d="M31 44 40 18 54 36M89 44 80 18 66 36" fill={coat} stroke="#34251f" strokeWidth="4" strokeLinejoin="round" />
-        <circle cx="60" cy="53" r="34" fill={coat} stroke="#34251f" strokeWidth="4" />
-        <path d="M32 71c4 23 19 34 28 34s24-11 28-34" fill={outfit} stroke="#34251f" strokeWidth="4" />
-        <path d="M42 78h36" stroke={accent} strokeWidth="8" strokeLinecap="round" />
-        <circle cx="48" cy="52" r="4" fill="#34251f" />
-        <circle cx="72" cy="52" r="4" fill="#34251f" />
-        <path d="M58 60h4l-2 4z" fill="#34251f" />
-        <path d="M52 68c4 5 12 5 16 0" fill="none" stroke="#34251f" strokeWidth="3" strokeLinecap="round" />
-        <path d="M22 58h17M20 68h18M81 58h17M82 68h18" stroke="#34251f" strokeWidth="2.5" strokeLinecap="round" />
-        {accessory === 'clipboard' && <rect x="76" y="74" width="20" height="26" rx="4" fill="#fff" stroke="#34251f" strokeWidth="3" />}
-        {accessory === 'tag' && <rect x="39" y="77" width="42" height="14" rx="4" fill="#fff" stroke="#34251f" strokeWidth="3" />}
-        {accessory === 'card' && <rect x="73" y="73" width="28" height="18" rx="4" fill="#fff" stroke="#34251f" strokeWidth="3" />}
-        {accessory === 'chart' && <path d="M78 91h20V72H78zM82 86l4-5 4 3 5-8" fill="#fff" stroke="#34251f" strokeWidth="3" strokeLinejoin="round" />}
-        {accessory === 'key' && <path d="M83 80a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm8 8h15m-5 0v7" fill="none" stroke="#34251f" strokeWidth="4" strokeLinecap="round" />}
-        {accessory === 'sign' && <path d="M82 74h24l-6 8 6 8H82zM88 90v15" fill="#fff" stroke="#34251f" strokeWidth="3" strokeLinejoin="round" />}
-        {accessory === 'phone' && <rect x="80" y="70" width="18" height="32" rx="5" fill="#fff" stroke="#34251f" strokeWidth="3" />}
-        {accessory === 'receipt' && <path d="M77 71h23v31l-5-3-5 3-5-3-5 3-3-2z" fill="#fff" stroke="#34251f" strokeWidth="3" strokeLinejoin="round" />}
-        {accessory === 'folder' && <path d="M74 79h12l4 5h17v18H74z" fill="#fff2a8" stroke="#34251f" strokeWidth="3" strokeLinejoin="round" />}
-      </svg>
+    <span className={`cat-wrap approved-cat ${large ? 'large' : ''}`}>
+      <img src={`/crypto/assets/roles/${role}.png`} alt={roleImageLabels[role] || 'Approved route cat character'} />
     </span>
   );
 }
